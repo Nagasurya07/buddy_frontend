@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { User, Bell, Headset } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useNotifications } from '../context/NotificationsContext.jsx';
 import { useLocation } from 'react-router-dom';
 
@@ -63,9 +64,9 @@ const Header = () => {
           />
         </div>
         <div className="flex items-center space-x-4">
-          <button className="p-2 text-gray-700 hover:text-gray-900 transition-colors" aria-label="Support">
+          <Link to="/me" className="p-2 text-gray-700 hover:text-gray-900 transition-colors" aria-label="Support / About Me">
             <Headset size={20} strokeWidth={2} />
-          </button>
+          </Link>
 
           <div ref={ref} className="relative">
             <button
@@ -106,9 +107,9 @@ const Header = () => {
             )}
           </div>
 
-          <button className="p-2 bg-purple-100 rounded-full text-purple-600 hover:bg-purple-200 transition-colors" aria-label="Account">
+          <Link to="/my-profile" className="p-2 bg-purple-100 rounded-full text-purple-600 hover:bg-purple-200 transition-colors" aria-label="My Profile">
             <User size={30} />
-          </button>
+          </Link>
         </div>
       </div>
     </header>
