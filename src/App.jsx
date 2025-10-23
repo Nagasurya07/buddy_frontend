@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, Trash2, User, Bell, Headphones, X, Mail, Phone, Edit2 } from 'lucide-react';
+import { Eye, Trash2, User, Bell, Headset, X, Mail, Phone, Edit2 } from 'lucide-react';
 
 const App = () => {
   const [users, setUsers] = useState([
@@ -48,15 +48,23 @@ const App = () => {
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-12 h-8 bg-black text-white flex items-center justify-center font-bold rounded">
-              LOGO
+            {/* Brand Logo */}
+            <div className="flex flex-col items-center select-none">
+              <div className="border-2 border-black px-4 py-1">
+                <span className="text-black font-extrabold tracking-tight text-xl">
+                  LOGO
+                </span>
+              </div>
+              <div className="mt-1 text-[10px] leading-tight text-black text-center">
+                <div className="font-medium">ESTD</div>
+                <div className="font-semibold">2025</div>
+              </div>
             </div>
-            <div className="w-4 h-2 bg-gray-300 rounded-full"></div>
           </div>
           
           <div className="flex items-center space-x-4">
-            <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-              <Headphones size={20} />
+            <button className="p-2 text-gray-700 hover:text-gray-900 transition-colors" aria-label="Support">
+              <Headset size={20} strokeWidth={2} />
             </button>
             <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
               <Bell size={20} />
@@ -556,7 +564,7 @@ const App = () => {
                   </div>
                   
                   <div>
-                    <label className="block textsm font-medium text-gray-700 mb-1">Contact</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Contact</label>
                     <input
                       type="text"
                       placeholder="Type here"
