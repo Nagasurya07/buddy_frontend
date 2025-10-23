@@ -11,11 +11,29 @@ const UserProfile = () => {
   const [activeTab, setActiveTab] = useState('basic');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [showEditHint, setShowEditHint] = useState(false);
 
   // Avatar upload handlers
   const fileInputRef = useRef(null);
+  const hintTimeoutRef = useRef(null);
+  const triggerEditPop = () => {
+    if (hintTimeoutRef.current) clearTimeout(hintTimeoutRef.current);
+    setShowEditHint(true);
+    hintTimeoutRef.current = setTimeout(() => setShowEditHint(false), 1500);
+  };
   const handleAvatarClick = () => {
-    fileInputRef.current?.click();
+    triggerEditPop();
+  };
+  const handleAvatarMouseDown = (e) => {
+    // prevent default to avoid double-trigger with onClick
+    e.preventDefault();
+    triggerEditPop();
+  };
+  const handleAvatarKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      triggerEditPop();
+    }
   };
   const handleAvatarChange = (e) => {
     const file = e.target.files?.[0];
@@ -33,6 +51,11 @@ const UserProfile = () => {
       }
     };
   }, [avatarUrl]);
+  useEffect(() => {
+    return () => {
+      if (hintTimeoutRef.current) clearTimeout(hintTimeoutRef.current);
+    };
+  }, []);
 
   const handleCopyEmail = async () => {
     if (!selectedUser?.email) return;
@@ -61,12 +84,20 @@ const UserProfile = () => {
     <main className="container mx-auto px-12 py-10">
   <div className="bg-white rounded-lg overflow-hidden shadow-section-soft">
         {/* Profile header: avatar + name + contact */}
-        <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white">
-          <div className="flex items-center gap-6">
+        <div className="relative overflow-hidden px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white">
+          {/* decorative arcs on the right to match screenshot */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2">
+            <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 w-[980px] h-[980px] rounded-full border border-purple-100/40"></div>
+            <div className="absolute right-[-80px] top-1/2 -translate-y-1/2 w-[820px] h-[820px] rounded-full border border-purple-100/30"></div>
+            <div className="absolute right-[-30px] top-1/2 -translate-y-1/2 w-[660px] h-[660px] rounded-full border border-purple-100/20"></div>
+          </div>
+          <div className="relative flex items-center gap-6">
             {/* Avatar with double ring (click to upload) */}
             <div className="relative">
               <button
                 type="button"
+                onMouseDown={handleAvatarMouseDown}
+                onKeyDown={handleAvatarKeyDown}
                 onClick={handleAvatarClick}
                 title="Change avatar"
                 aria-label="Change avatar"
@@ -82,10 +113,22 @@ const UserProfile = () => {
                     </svg>
                   )}
                 </div>
-                {/* Pencil overlay */}
-                <span className="pointer-events-none absolute -bottom-1 -right-1 h-8 w-8 rounded-lg bg-white/80 shadow-section-soft flex items-center justify-center text-purple-600 group-hover:bg-white">
-                  <Edit2 size={16} />
-                </span>
+                {/* Silver shade overlay when edit pops */}
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-0 rounded-full bg-gray-400/35 transition-opacity ${showEditHint ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
+                />
+                {/* Center pop-up pencil overlay on click (opens file on click) */}
+                <button
+                  type="button"
+                  aria-label="Edit avatar"
+                  onClick={() => fileInputRef.current?.click()}
+                  className={`absolute inset-0 z-10 flex items-center justify-center transition-all duration-200 ${showEditHint ? 'opacity-100 scale-100' : 'pointer-events-none opacity-0 scale-75'}`}
+                >
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-purple-100 text-purple-600 shadow-section-soft ring-1 ring-white/70">
+                    <Edit2 size={16} />
+                  </span>
+                </button>
               </button>
               <input
                 ref={fileInputRef}
