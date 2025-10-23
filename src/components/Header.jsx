@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { User, Bell, Headset } from 'lucide-react';
 import { useNotifications } from '../context/NotificationsContext.jsx';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,6 +28,14 @@ const Header = () => {
   const { notifications, unreadCount, markAllRead, clearAll } = useNotifications();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+  const location = useLocation();
+
+  const isUsersList = location.pathname === '/users';
+  const primaryLogo = 'https://interviewbuddy.net/assests/logos/IBlogo_light.svg';
+  const primaryLogoFixed = 'https://interviewbuddy.net/assets/logos/IBlogo_light.svg';
+  const oldLogo = 'https://interviewbuddy.net/assests/logos/old-ib-logo.svg';
+  const oldLogoFixed = 'https://interviewbuddy.net/assets/logos/old-ib-logo.svg';
+  const currentLogoSrc = isUsersList ? oldLogo : primaryLogo;
 
   useEffect(() => {
     const onDoc = (e) => {
@@ -40,17 +49,18 @@ const Header = () => {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled ? 'backdrop-blur-sm bg-white/60 border-b border-gray-200 shadow-sm' : 'bg-white border-b border-gray-200 shadow-sm'}`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center h-16">
-        <div className="flex items-center space-x-2">
-          {/* Brand Logo */}
-          <div className="flex flex-col items-center select-none">
-            <div className="border-2 border-black px-4 py-1">
-              <span className="text-black font-extrabold tracking-tight text-xl">LOGO</span>
-            </div>
-            <div className="mt-1 text-[8px] leading-tight text-black text-center">
-              <div className="font-medium">ESTD</div>
-              <div className="font-semibold">2025</div>
-            </div>
-          </div>
+        <div className="flex items-center space-x-2 select-none">
+          {/* Brand Logo: old logo on /users, new logo elsewhere */}
+          <img
+            src={currentLogoSrc}
+            alt={isUsersList ? 'InterviewBuddy old logo' : 'InterviewBuddy logo'}
+            className="h-8 md:h-9 w-auto"
+            onError={(e) => {
+              // Fallback to corrected path if provided URL has a typo
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = isUsersList ? oldLogoFixed : primaryLogoFixed;
+            }}
+          />
         </div>
         <div className="flex items-center space-x-4">
           <button className="p-2 text-gray-700 hover:text-gray-900 transition-colors" aria-label="Support">
