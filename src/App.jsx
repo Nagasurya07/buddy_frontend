@@ -92,7 +92,7 @@ const App = () => {
       {showUserProfile ? (
         // User Profile View
         <main className="container mx-auto px-12 py-10">
-          <div className="bg-white rounded-lg shadow-soft-brand overflow-hidden">
+          <div className="bg-white rounded-lg overflow-hidden">
             {/* Profile header: avatar + name + contact */}
             <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white border-b border-gray-200">
               <div className="flex items-center gap-6">
@@ -142,20 +142,20 @@ const App = () => {
             <div className="px-6 py-4 border-b border-gray-400">
               <div className="flex space-x-1">
                 <button 
-                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${activeTab === 'basic' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'basic' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                   onClick={() => setActiveTab('basic')}
                 >
                   Basic Info
                 </button>
                 <button 
-                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${activeTab === 'education' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'education' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                   onClick={() => setActiveTab('education')}
                 >
                   <span>Education & skills</span>
                   <span className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full"></span>
                 </button>
                 <button 
-                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${activeTab === 'experience' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'experience' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                   onClick={() => setActiveTab('experience')}
                 >
                   Experience
@@ -521,7 +521,7 @@ const App = () => {
       ) : (
         // Users List View
         <main className="container mx-auto px-6 py-8">
-          <div className="bg-white rounded-lg shadow-soft-brand overflow-hidden">
+          <div className="bg-white rounded-lg overflow-hidden">
             {/* Table header: title + Add user */}
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-lg font-semibold text-gray-800">Users</h2>
