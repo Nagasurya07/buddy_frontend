@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, Trash2, User, Bell, Headset, X, Mail, Phone, Edit2 } from 'lucide-react';
+import { Eye, Trash2, User, Bell, Headset, X, Mail, Phone, Edit2, Copy, Check } from 'lucide-react';
 
 const App = () => {
   const [users, setUsers] = useState([
@@ -17,6 +17,7 @@ const App = () => {
     email: '',
     contact: ''
   });
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleDeleteUser = (id) => {
     setUsers(users.filter(user => user.id !== id));
@@ -40,6 +41,17 @@ const App = () => {
     setSelectedUser(user);
     setShowUserProfile(true);
     setActiveTab('basic');
+  };
+
+  const handleCopyEmail = async () => {
+    if (!selectedUser?.email) return;
+    try {
+      await navigator.clipboard.writeText(selectedUser.email);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 1500);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
   };
 
   return (
@@ -79,27 +91,47 @@ const App = () => {
   {/* Main content: profile view or users list */}
       {showUserProfile ? (
         // User Profile View
-        <main className="container mx-auto px-6 py-8">
+        <main className="container mx-auto px-12 py-10">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Profile header: avatar + name + contact */}
-            <div className="px-6 py-6 bg-gradient-to-r from-purple-50 to-white border-b border-gray-200">
-              <div className="flex items-center space-x-6">
-                <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-purple-600">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+            <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white border-b border-gray-200">
+              <div className="flex items-center gap-6">
+                {/* Avatar with double ring */}
+                <div className="relative">
+                  <div className="w-28 h-28 rounded-full bg-purple-50 flex items-center justify-center ring-8 ring-purple-50">
+                    <div className="w-28 h-28 rounded-full bg-purple-100 flex items-center justify-center ring-2 ring-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-purple-600">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Name, email and phone */}
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-800">{selectedUser?.name}</h1>
-                  <div className="flex items-center space-x-4 mt-2">
+                  <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{selectedUser?.name}</h1>
+                  <div className="flex flex-col items-start space-y-1.5 mt-2">
                     <div className="flex items-center text-gray-600">
-                      <Mail size={16} className="mr-1" />
-                      {selectedUser?.email}
+                      <Mail size={16} className="mr-2 text-gray-500" />
+                      <span className="text-gray-700">{selectedUser?.email}</span>
+                      <button
+                        type="button"
+                        onClick={handleCopyEmail}
+                        title={copiedEmail ? 'Copied!' : 'Copy email'}
+                        className="ml-3 inline-flex items-center jurple-600 hover:bg-purple-50 transition-colors"
+                        aria-label="Copy email"
+                      >
+                        {copiedEmail ? (
+                          <Check size={14} className="text-green-600" />
+                        ) : (
+                          <Copy size={14} />
+                        )}
+                      </button>
                     </div>
                     <div className="flex items-center text-gray-600">
-                      <Phone size={16} className="mr-1" />
-                      {selectedUser?.contact}
+                      <Phone size={16} className="mr-2 text-gray-500" />
+                      <span className="text-gray-700">{selectedUser?.contact}</span>
                     </div>
                   </div>
                 </div>
@@ -107,7 +139,7 @@ const App = () => {
             </div>
 
             {/* Tabs: switch activeTab (basic | education | experience) */}
-            <div className="px-6 py-4 border-b border-gray-200">
+            <div className="px-6 py-4 border-b border-gray-400">
               <div className="flex space-x-1">
                 <button 
                   className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'basic' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
