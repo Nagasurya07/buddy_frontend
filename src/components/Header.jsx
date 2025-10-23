@@ -24,7 +24,7 @@ const Header = () => {
     };
   }, []);
 
-  const { notifications, unreadCount, markAllRead } = useNotifications();
+  const { notifications, unreadCount, markAllRead, clearAll } = useNotifications();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -71,8 +71,17 @@ const Header = () => {
 
             {open && (
               <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                <div className="p-3">
+                <div className="px-3 py-2 flex items-center justify-between">
                   <div className="text-sm font-semibold">Notifications</div>
+                  <button
+                    type="button"
+                    className={`text-xs text-gray-600 hover:text-gray-900 ${notifications.length === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+                    onClick={() => notifications.length > 0 && clearAll()}
+                    disabled={notifications.length === 0}
+                    title={notifications.length === 0 ? 'No notifications' : 'Clear all'}
+                  >
+                    Clear all
+                  </button>
                 </div>
                 <div className="max-h-64 overflow-auto divide-y divide-gray-100">
                   {notifications.length === 0 && <div className="p-3 text-sm text-gray-500">No notifications</div>}

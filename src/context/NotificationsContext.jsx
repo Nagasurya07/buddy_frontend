@@ -12,10 +12,11 @@ export const NotificationsProvider = ({ children }) => {
 
   const markAllRead = () => setNotifications(prev => prev.map(n => ({ ...n, read: true })));
   const markRead = (id) => setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+  const clearAll = () => setNotifications([]);
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  const value = useMemo(() => ({ notifications, addNotification, markAllRead, markRead, unreadCount }), [notifications]);
+  const value = useMemo(() => ({ notifications, addNotification, markAllRead, markRead, clearAll, unreadCount }), [notifications]);
 
   return (
     <NotificationsContext.Provider value={value}>
