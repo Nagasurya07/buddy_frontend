@@ -321,10 +321,38 @@ const App = () => {
                     />
                   </div>
                 </div>
-              </div>
-            )}
+                
 
-            {activeTab === 'experience' && (
+                {/* Skills & Projects */}
+                <div className="mt-8 p-4 border border-gray-200 rounded-lg shadow-sm">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-lg font-semibold text-gray-800">Skills & Projects</h3>
+                    <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
+                      <Edit2 size={16} />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Skills</label>
+                      <textarea
+                        placeholder="Enter here"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent h-36"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Projects</label>
+                      <textarea
+                        placeholder="Enter here"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent h-36"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              )}
+
+             {activeTab === 'experience' && (
               <div className="px-6 py-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-lg font-semibold text-gray-800">Work Experience</h2>
