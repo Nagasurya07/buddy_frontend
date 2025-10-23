@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Mail, Phone, Edit2, Copy, Check, FileText } from 'lucide-react';
 import { useUsers } from '../context/UsersContext.jsx';
@@ -10,6 +10,29 @@ const UserProfile = () => {
   const selectedUser = getUserById(id);
   const [activeTab, setActiveTab] = useState('basic');
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
+  // Avatar upload handlers
+  const fileInputRef = useRef(null);
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setAvatarUrl((prev) => {
+      if (prev && prev.startsWith('blob:')) URL.revokeObjectURL(prev);
+      return url;
+    });
+  };
+  useEffect(() => {
+    return () => {
+      if (avatarUrl && avatarUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(avatarUrl);
+      }
+    };
+  }, [avatarUrl]);
 
   const handleCopyEmail = async () => {
     if (!selectedUser?.email) return;
@@ -38,18 +61,39 @@ const UserProfile = () => {
     <main className="container mx-auto px-12 py-10">
   <div className="bg-white rounded-lg overflow-hidden shadow-section-soft">
         {/* Profile header: avatar + name + contact */}
-        <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white border-b border-gray-200">
+        <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white">
           <div className="flex items-center gap-6">
-            {/* Avatar with double ring */}
+            {/* Avatar with double ring (click to upload) */}
             <div className="relative">
-              <div className="w-28 h-28 rounded-full bg-purple-50 flex items-center justify-center ring-8 ring-purple-50">
-                <div className="w-28 h-28 rounded-full bg-purple-100 flex items-center justify-center ring-2 ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-purple-600">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+              <button
+                type="button"
+                onClick={handleAvatarClick}
+                title="Change avatar"
+                aria-label="Change avatar"
+                className="group w-28 h-28 rounded-full bg-purple-50 ring-8 ring-purple-50 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+              >
+                <div className="w-28 h-28 rounded-full bg-purple-100 ring-2 ring-white overflow-hidden flex items-center justify-center">
+                  {avatarUrl ? (
+                    <img src={avatarUrl} alt="Profile avatar" className="w-full h-full object-cover" />
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-purple-600">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  )}
                 </div>
-              </div>
+                {/* Pencil overlay */}
+                <span className="pointer-events-none absolute -bottom-1 -right-1 h-8 w-8 rounded-lg bg-white/80 shadow-section-soft flex items-center justify-center text-purple-600 group-hover:bg-white">
+                  <Edit2 size={16} />
+                </span>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleAvatarChange}
+              />
             </div>
 
             {/* Name, email and phone */}
@@ -77,7 +121,7 @@ const UserProfile = () => {
         </div>
 
         {/* Tabs */}
-        <div className="px-6 py-4 border-b border-gray-400">
+        <div className="px-6 py-4">
           <div className="flex space-x-1">
             <button
               className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'basic' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
@@ -202,7 +246,7 @@ const UserProfile = () => {
         {activeTab === 'education' && (
           <div className="px-6 py-6 space-y-6">
             {/* Education details card */}
-            <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-section-soft">
+            <div className="p-6 bg-white rounded-xl shadow-section-soft">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold text-gray-800">Education Details</h2>
                 <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
@@ -244,7 +288,7 @@ const UserProfile = () => {
             </div>
 
             {/* Skills & Projects card */}
-            <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-section-soft">
+            <div className="p-6 bg-white rounded-xl shadow-section-soft">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold text-gray-800">Skills & Projects</h3>
                 <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
@@ -266,58 +310,61 @@ const UserProfile = () => {
         )}
 
         {activeTab === 'experience' && (
-          <div className="px-6 py-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-800">Work Experience</h2>
-              <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
-                <Edit2 size={16} />
-              </button>
-            </div>
+          <div className="px-6 py-6 space-y-6">
+            {/* Work Experience card (single outer card, no inner borders) */}
+            <div className="p-6 bg-white rounded-xl shadow-section-soft">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-semibold text-gray-800">Work Experience</h2>
+                <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
+                  <Edit2 size={16} />
+                </button>
+              </div>
 
-            {/* Experience entry 1 */}
-            <div className="mb-6 p-4 border border-gray-200 rounded-lg shadow-section-soft bg-white">
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
-                <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Sub-domain</label>
-                  <input type="text" placeholder="e.g. MERN Stack" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              {/* Experience entry 1 */}
+              <div className="mb-8">
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
+                  <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Experience</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                    <option>Select an option</option>
-                    <option>Less than 1 year</option>
-                    <option>1-2 years</option>
-                    <option>2-5 years</option>
-                    <option>5+ years</option>
-                  </select>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Sub-domain</label>
+                    <input type="text" placeholder="e.g. MERN Stack" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Experience</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                      <option>Select an option</option>
+                      <option>Less than 1 year</option>
+                      <option>1-2 years</option>
+                      <option>2-5 years</option>
+                      <option>5+ years</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Experience entry 2 */}
-            <div className="mb-6 p-4 border border-gray-200 rounded-lg shadow-section-soft bg-white">
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
-                <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Sub-domain</label>
-                  <input type="text" placeholder="e.g. MERN Stack" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              {/* Experience entry 2 */}
+              <div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
+                  <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Experience</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                    <option>Select an option</option>
-                    <option>Less than 1 year</option>
-                    <option>1-2 years</option>
-                    <option>2-5 years</option>
-                    <option>5+ years</option>
-                  </select>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Sub-domain</label>
+                    <input type="text" placeholder="e.g. MERN Stack" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Experience</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                      <option>Select an option</option>
+                      <option>Less than 1 year</option>
+                      <option>1-2 years</option>
+                      <option>2-5 years</option>
+                      <option>5+ years</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -325,7 +372,7 @@ const UserProfile = () => {
             {/* LinkedIn and Resume section */}
             <div className="grid grid-cols-2 gap-6">
               {/* LinkedIn card */}
-              <div className="p-4 border border-gray-200 rounded-lg shadow-section-soft bg-white">
+              <div className="p-4 rounded-lg shadow-section-soft bg-white">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-semibold text-gray-800">LinkedIn</h3>
                   <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
@@ -339,7 +386,7 @@ const UserProfile = () => {
               </div>
 
               {/* Resume card */}
-              <div className="relative p-6 border border-gray-200 rounded-xl shadow-section-soft bg-white">
+              <div className="relative p-6 rounded-xl shadow-section-soft bg-white">
                 <h3 className="text-lg font-semibold text-gray-800">Resume</h3>
                 <button
                   className="absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors"
