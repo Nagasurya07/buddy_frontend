@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Mail, Phone, Edit2, Copy, Check } from 'lucide-react';
 import { useUsers } from '../context/UsersContext.jsx';
+import { useNotifications } from '../context/NotificationsContext.jsx';
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -10,6 +11,14 @@ const UserProfile = () => {
   const selectedUser = getUserById(id);
   const [activeTab, setActiveTab] = useState('basic');
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const { addNotification } = useNotifications();
+
+  useEffect(() => {
+    if (selectedUser) {
+      addNotification({ title: `Opened ${selectedUser.name}`, body: `Viewed profile of ${selectedUser.name}` });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedUser]);
 
   const handleCopyEmail = async () => {
     if (!selectedUser?.email) return;

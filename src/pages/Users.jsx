@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, Trash2 } from 'lucide-react';
+import { useNotifications } from '../context/NotificationsContext.jsx';
 import AddUserDrawer from '../components/AddUserDrawer.jsx';
 import { useUsers } from '../context/UsersContext.jsx';
 
 const Users = () => {
   const { users, deleteUser } = useUsers();
+  const { addNotification } = useNotifications();
   const [openAdd, setOpenAdd] = useState(false);
 
   return (
@@ -48,12 +50,16 @@ const Users = () => {
                         to={`/users/${user.id}`}
                         className="text-gray-400 hover:text-gray-600 p-1 transition-colors"
                         title="View"
+                        onClick={() => addNotification({ title: `Opened ${user.name}`, body: `Viewed profile of ${user.name}` })}
                       >
                         <Eye size={18} />
                       </Link>
                       <button
                         className="text-gray-400 hover:text-red-600 p-1 transition-colors"
-                        onClick={() => deleteUser(user.id)}
+                        onClick={() => {
+                          deleteUser(user.id);
+                          addNotification({ title: `${user.name} deleted`, body: `User ${user.name} was removed`, type: 'warning' });
+                        }}
                         title="Delete"
                       >
                         <Trash2 size={18} />
