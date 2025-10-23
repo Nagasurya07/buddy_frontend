@@ -5,3 +5,11 @@
 /* Optional: smooth fonts and background */
 html, body, #root { height: 100%; }
 body { @apply bg-gray-50; }
+
+/* Custom utilities */
+@layer utilities {
+	/* Soft brand shadow used for main content cards */
+	.shadow-soft-brand {
+		box-shadow: 0px 2px 12px 0px #3659E21F;
+	}
+}

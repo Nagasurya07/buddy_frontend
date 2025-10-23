@@ -92,7 +92,7 @@ const App = () => {
       {showUserProfile ? (
         // User Profile View
         <main className="container mx-auto px-12 py-10">
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="bg-white rounded-lg shadow-soft-brand overflow-hidden">
             {/* Profile header: avatar + name + contact */}
             <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white border-b border-gray-200">
               <div className="flex items-center gap-6">
@@ -119,7 +119,7 @@ const App = () => {
                         type="button"
                         onClick={handleCopyEmail}
                         title={copiedEmail ? 'Copied!' : 'Copy email'}
-                        className="ml-3 inline-flex items-center jurple-600 hover:bg-purple-50 transition-colors"
+                        className="ml-3 inline-flex items-center justify-center rounded-md border border-purple-200 p-1.5 text-purple-600 hover:bg-purple-50 transition-colors"
                         aria-label="Copy email"
                       >
                         {copiedEmail ? (
@@ -520,7 +520,7 @@ const App = () => {
       ) : (
         // Users List View
         <main className="container mx-auto px-6 py-8">
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="bg-white rounded-lg shadow-soft-brand overflow-hidden">
             {/* Table header: title + Add user */}
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-lg font-semibold text-gray-800">Users</h2>
@@ -587,7 +587,7 @@ const App = () => {
           ></div>
           
           {/* Sidebar panel */}
-          <div className="relative w-96 bg-white shadow-xl h-full ml-auto transform transition-transform duration-300 ease-in-out">
+          <div className="relative w-full md:w-1/2 bg-white shadow-xl h-full ml-auto transform transition-transform duration-300 ease-in-out">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold text-gray-800">Add User</h2>
