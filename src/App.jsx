@@ -44,7 +44,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+  {/* Header: logo and quick actions */}
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
@@ -76,12 +76,12 @@ const App = () => {
         </div>
       </header>
 
-      {/* Main Content */}
+  {/* Main content: profile view or users list */}
       {showUserProfile ? (
         // User Profile View
         <main className="container mx-auto px-6 py-8">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            {/* User Header */}
+            {/* Profile header: avatar + name + contact */}
             <div className="px-6 py-6 bg-gradient-to-r from-purple-50 to-white border-b border-gray-200">
               <div className="flex items-center space-x-6">
                 <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center">
@@ -106,7 +106,7 @@ const App = () => {
               </div>
             </div>
 
-            {/* Tabs */}
+            {/* Tabs: switch activeTab (basic | education | experience) */}
             <div className="px-6 py-4 border-b border-gray-200">
               <div className="flex space-x-1">
                 <button 
@@ -130,7 +130,7 @@ const App = () => {
               </div>
             </div>
 
-            {/* Content based on active tab */}
+            {/* Tab panels: render section based on activeTab */}
             {activeTab === 'basic' && (
               <div className="px-6 py-6">
                 <div className="flex justify-between items-center mb-4">
@@ -323,7 +323,7 @@ const App = () => {
                 </div>
                 
 
-                {/* Skills & Projects */}
+                {/* Skills & Projects section */}
                 <div className="mt-8 p-4 border border-gray-200 rounded-lg shadow-sm">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-semibold text-gray-800">Skills & Projects</h3>
@@ -361,7 +361,7 @@ const App = () => {
                   </button>
                 </div>
                 
-                {/* First Experience Entry */}
+                {/* Experience entry 1 */}
                 <div className="mb-6 p-4 border border-gray-200 rounded-lg">
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
@@ -395,7 +395,7 @@ const App = () => {
                   </div>
                 </div>
                 
-                {/* Second Experience Entry */}
+                {/* Experience entry 2 */}
                 <div className="mb-6 p-4 border border-gray-200 rounded-lg">
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
@@ -429,9 +429,9 @@ const App = () => {
                   </div>
                 </div>
                 
-                {/* LinkedIn and Resume Section */}
+                {/* LinkedIn and Resume section */}
                 <div className="grid grid-cols-2 gap-6">
-                  {/* LinkedIn Section */}
+                  {/* LinkedIn card */}
                   <div className="p-4 border border-gray-200 rounded-lg">
                     <div className="flex justify-between items-center mb-4">
                       <h3 className="text-lg font-semibold text-gray-800">LinkedIn</h3>
@@ -449,7 +449,7 @@ const App = () => {
                     </div>
                   </div>
                   
-                  {/* Resume Section */}
+                  {/* Resume card */}
                   <div className="p-4 border border-gray-200 rounded-lg">
                     <div className="flex justify-between items-center mb-4">
                       <h3 className="text-lg font-semibold text-gray-800">Resume</h3>
@@ -475,7 +475,7 @@ const App = () => {
             )}
           </div>
           
-          {/* Back button */}
+          {/* Back button to users list */}
           <div className="mt-6">
             <button 
               className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
@@ -489,7 +489,7 @@ const App = () => {
         // Users List View
         <main className="container mx-auto px-6 py-8">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            {/* Table Header */}
+            {/* Table header: title + Add user */}
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-lg font-semibold text-gray-800">Users</h2>
               <button 
@@ -503,7 +503,7 @@ const App = () => {
               </button>
             </div>
 
-            {/* Users Table */}
+            {/* Users table: rows mapped from users */}
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50">
@@ -545,16 +545,16 @@ const App = () => {
         </main>
       )}
 
-      {/* Add User Sidebar */}
+  {/* Add user sidebar: slide-in form */}
       {showAddUserForm && (
         <div className="fixed inset-0 z-50 flex">
-          {/* Overlay */}
+          {/* Overlay: click to close */}
           <div 
             className="absolute inset-0 bg-black opacity-50"
             onClick={() => setShowAddUserForm(false)}
           ></div>
           
-          {/* Sidebar */}
+          {/* Sidebar panel */}
           <div className="relative w-96 bg-white shadow-xl h-full ml-auto transform transition-transform duration-300 ease-in-out">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
