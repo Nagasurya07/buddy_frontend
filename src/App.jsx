@@ -114,18 +114,18 @@ const App = () => {
                   <div className="flex flex-col items-start space-y-1.5 mt-2">
                     <div className="flex items-center text-gray-600">
                       <Mail size={16} className="mr-2 text-gray-500" />
-                      <span className="text-gray-700">{selectedUser?.email}</span>
+                      <span className="text-gray-700 px-2">{selectedUser?.email}</span>
                       <button
+
                         type="button"
                         onClick={handleCopyEmail}
                         title={copiedEmail ? 'Copied!' : 'Copy email'}
-                        className="ml-3 inline-flex items-center justify-center rounded-md border border-purple-200 p-1.5 text-purple-600 hover:bg-purple-50 transition-colors"
                         aria-label="Copy email"
                       >
                         {copiedEmail ? (
-                          <Check size={14} className="text-green-600" />
+                          <Check size={16} className="text-green-600" />
                         ) : (
-                          <Copy size={14} />
+                          <Copy size={16} />
                         )}
                       </button>
                     </div>
@@ -142,19 +142,20 @@ const App = () => {
             <div className="px-6 py-4 border-b border-gray-400">
               <div className="flex space-x-1">
                 <button 
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'basic' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${activeTab === 'basic' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                   onClick={() => setActiveTab('basic')}
                 >
                   Basic Info
                 </button>
                 <button 
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'education' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${activeTab === 'education' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                   onClick={() => setActiveTab('education')}
                 >
-                  Education & Skills
+                  <span>Education & skills</span>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full"></span>
                 </button>
                 <button 
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === 'experience' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${activeTab === 'experience' ? 'text-purple-700 bg-purple-100 hover:bg-purple-200' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}`}
                   onClick={() => setActiveTab('experience')}
                 >
                   Experience
