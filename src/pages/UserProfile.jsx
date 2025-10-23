@@ -369,7 +369,7 @@ const UserProfile = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
                   <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 ml-3 pl-4 border-l border-gray-200">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Sub-domain</label>
                     <input type="text" placeholder="e.g. MERN Stack" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
@@ -393,7 +393,7 @@ const UserProfile = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
                   <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 ml-3 pl-4 border-l border-gray-200">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Sub-domain</label>
                     <input type="text" placeholder="e.g. MERN Stack" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
