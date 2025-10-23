@@ -55,7 +55,7 @@ const App = () => {
                   LOGO
                 </span>
               </div>
-              <div className="mt-1 text-[10px] leading-tight text-black text-center">
+              <div className="mt-1 text-[8px] leading-tight text-black text-center">
                 <div className="font-medium">ESTD</div>
                 <div className="font-semibold">2025</div>
               </div>
@@ -70,7 +70,7 @@ const App = () => {
               <Bell size={20} />
             </button>
             <button className="p-2 bg-purple-100 rounded-full text-purple-600 hover:bg-purple-200 transition-colors">
-              <User size={20} />
+              <User size={30} />
             </button>
           </div>
         </div>
