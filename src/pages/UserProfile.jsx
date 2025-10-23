@@ -36,7 +36,7 @@ const UserProfile = () => {
 
   return (
     <main className="container mx-auto px-12 py-10">
-      <div className="bg-white rounded-lg overflow-hidden">
+  <div className="bg-white rounded-lg overflow-hidden shadow-section-soft">
         {/* Profile header: avatar + name + contact */}
         <div className="px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white border-b border-gray-200">
           <div className="flex items-center gap-6">
@@ -200,48 +200,51 @@ const UserProfile = () => {
         )}
 
         {activeTab === 'education' && (
-          <div className="px-6 py-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-800">Education Details</h2>
-              <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
-                <Edit2 size={16} />
-              </button>
+          <div className="px-6 py-6 space-y-6">
+            {/* Education details card */}
+            <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-section-soft">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-semibold text-gray-800">Education Details</h2>
+                <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
+                  <Edit2 size={16} />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">School / College</label>
+                  <input type="text" placeholder="e.g. Lincoln College" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Highest degree or equivalent</label>
+                  <input type="text" placeholder="e.g. Bachelors in Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Course</label>
+                  <input type="text" placeholder="e.g. Computer science engineering" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Year of completion</label>
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <option>YYYY</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <option>2021</option>
+                    <option>2020</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+                  <input type="text" placeholder="Enter here" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">School / College</label>
-                <input type="text" placeholder="e.g. Lincoln College" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Highest degree or equivalent</label>
-                <input type="text" placeholder="e.g. Bachelors in Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Course</label>
-                <input type="text" placeholder="e.g. Computer science engineering" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Year of completion</label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                  <option>YYYY</option>
-                  <option>2023</option>
-                  <option>2022</option>
-                  <option>2021</option>
-                  <option>2020</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Grade</label>
-                <input type="text" placeholder="Enter here" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-              </div>
-            </div>
-
-            {/* Skills & Projects section */}
-            <div className="mt-8 p-4 border border-gray-200 rounded-lg shadow-sm">
+            {/* Skills & Projects card */}
+            <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-section-soft">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold text-gray-800">Skills & Projects</h3>
                 <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
@@ -272,7 +275,7 @@ const UserProfile = () => {
             </div>
 
             {/* Experience entry 1 */}
-            <div className="mb-6 p-4 border border-gray-200 rounded-lg">
+            <div className="mb-6 p-4 border border-gray-200 rounded-lg shadow-section-soft bg-white">
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
                 <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
@@ -296,7 +299,7 @@ const UserProfile = () => {
             </div>
 
             {/* Experience entry 2 */}
-            <div className="mb-6 p-4 border border-gray-200 rounded-lg">
+            <div className="mb-6 p-4 border border-gray-200 rounded-lg shadow-section-soft bg-white">
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Domain</label>
                 <input type="text" placeholder="e.g. Technology" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
@@ -322,7 +325,7 @@ const UserProfile = () => {
             {/* LinkedIn and Resume section */}
             <div className="grid grid-cols-2 gap-6">
               {/* LinkedIn card */}
-              <div className="p-4 border border-gray-200 rounded-lg">
+              <div className="p-4 border border-gray-200 rounded-lg shadow-section-soft bg-white">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-semibold text-gray-800">LinkedIn</h3>
                   <button className="p-2 bg-purple-100 rounded-md text-purple-600 hover:bg-purple-200 transition-colors">
@@ -336,7 +339,7 @@ const UserProfile = () => {
               </div>
 
               {/* Resume card */}
-              <div className="relative p-6 border border-gray-200 rounded-xl">
+              <div className="relative p-6 border border-gray-200 rounded-xl shadow-section-soft bg-white">
                 <h3 className="text-lg font-semibold text-gray-800">Resume</h3>
                 <button
                   className="absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors"

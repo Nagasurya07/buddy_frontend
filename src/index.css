@@ -7,3 +7,9 @@ html, body, #root { height: 100%; }
 body { @apply bg-gray-50; }
 
 /* Custom utilities (none currently) */
+@layer utilities {
+	/* Soft section/card shadow inspired by design */
+	.shadow-section-soft {
+		box-shadow: 0 8px 28px rgba(124, 58, 237, 0.12);
+	}
+}

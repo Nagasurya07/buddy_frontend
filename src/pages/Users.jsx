@@ -12,7 +12,7 @@ const Users = () => {
 
   return (
     <main className="container mx-auto px-6 py-8">
-      <div className="bg-white rounded-lg overflow-hidden">
+  <div className="bg-white rounded-lg overflow-hidden shadow-section-soft">
         {/* Table header: title + Add user */}
         <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-800">Users</h2>
