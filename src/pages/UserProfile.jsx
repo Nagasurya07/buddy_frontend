@@ -139,8 +139,8 @@ const UserProfile = () => {
               />
             </div>
 
-            {/* Name, email and phone */}
-            <div>
+            {/* Name, email and phone (shaded) */}
+            <div className="rounded-md bg-gray-50 p-3">
               <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{selectedUser?.name}</h1>
               <div className="flex flex-col items-start space-y-1.5 mt-2">
                 <div className="flex items-center text-gray-600">
