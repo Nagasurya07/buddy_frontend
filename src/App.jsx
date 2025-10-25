@@ -7,7 +7,7 @@ import MyProfile from './pages/MyProfile.jsx';
 import NotFound from './pages/NotFound.jsx';
 import { UsersProvider } from './context/UsersContext.jsx';
 import { NotificationsProvider } from './context/NotificationsContext.jsx';
-
+import { Analytics } from "@vercel/analytics/next"
 const App = () => {
   return (
     <NotificationsProvider>

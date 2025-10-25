@@ -141,24 +141,32 @@ const UserProfile = () => {
 
             {/* Name, email and phone (shaded) */}
             <div className="rounded-md bg-gray-50 p-3">
-              <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{selectedUser?.name}</h1>
-              <div className="flex flex-col items-start space-y-1.5 mt-2">
-                <div className="flex items-center text-gray-600">
-                  <Mail size={16} className="mr-2 text-gray-500" />
-                  <span className="text-gray-700 px-2">{selectedUser?.email}</span>
-                  <button type="button" onClick={handleCopyEmail} title={copiedEmail ? 'Copied!' : 'Copy email'} aria-label="Copy email">
-                    {copiedEmail ? (
-                      <Check size={16} className="text-green-600" />
-                    ) : (
-                      <Copy size={16} />
-                    )}
-                  </button>
+                {/* Name, email and phone (with silver shade overlay) */}
+                <div className="relative rounded-md">
+                  {/* translucent silver shade behind this block only */}
+                  <span aria-hidden="true" className="absolute inset-0 rounded-md bg-gray-400/12 pointer-events-none" />
+
+                  <div className="relative z-10">
+                    <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{selectedUser?.name}</h1>
+                    <div className="flex flex-col items-start space-y-1.5 mt-2">
+                      <div className="flex items-center text-gray-600">
+                        <Mail size={16} className="mr-2 text-gray-500" />
+                        <span className="text-gray-700 px-2">{selectedUser?.email}</span>
+                        <button type="button" onClick={handleCopyEmail} title={copiedEmail ? 'Copied!' : 'Copy email'} aria-label="Copy email">
+                          {copiedEmail ? (
+                            <Check size={16} className="text-green-600" />
+                          ) : (
+                            <Copy size={16} />
+                          )}
+                        </button>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <Phone size={16} className="mr-2 text-gray-500" />
+                        <span className="text-gray-700">{selectedUser?.contact}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center text-gray-600">
-                  <Phone size={16} className="mr-2 text-gray-500" />
-                  <span className="text-gray-700">{selectedUser?.contact}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
