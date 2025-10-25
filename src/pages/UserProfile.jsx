@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FileText } from 'lucide-react';
+import { FileText, Edit2 } from 'lucide-react';
 import ProfileHeader from '../components/ProfileHeader.jsx';
 import { useUsers } from '../context/UsersContext.jsx';
 
@@ -40,16 +40,8 @@ const UserProfile = () => {
   return (
     <main className="container mx-auto px-12 py-10">
   <div className="bg-white rounded-lg overflow-hidden shadow-section-soft">
-        {/* Profile header: avatar + name + contact */}
-        <div className="relative overflow-hidden px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white">
-          {/* decorative arcs on the right to match screenshot */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2">
-            <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 w-[980px] h-[980px] rounded-full border border-purple-100/40"></div>
-            <div className="absolute right-[-80px] top-1/2 -translate-y-1/2 w-[820px] h-[820px] rounded-full border border-purple-100/30"></div>
-            <div className="absolute right-[-30px] top-1/2 -translate-y-1/2 w-[660px] h-[660px] rounded-full border border-purple-100/20"></div>
-          </div>
-          <ProfileHeader selectedUser={selectedUser} handleCopyEmail={handleCopyEmail} copiedEmail={copiedEmail} />
-        </div>
+        {/* Profile header component */}
+        <ProfileHeader selectedUser={selectedUser} handleCopyEmail={handleCopyEmail} copiedEmail={copiedEmail} />
 
         {/* Tabs */}
         <div className="px-6 py-4">

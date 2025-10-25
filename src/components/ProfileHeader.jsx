@@ -47,12 +47,12 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-section-soft">
+    <>
       {/* Profile header: avatar + name + contact */}
       <div className="relative overflow-hidden px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white">
         {/* decorative arcs on the right to match screenshot */}
         <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2">
-          <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 w-[980px] h-[980px] rounded-full border border-purple-100/40"></div>
+          <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 w-[1280px] h-[1280px] rounded-full border border-purple-100/40"></div>
           <div className="absolute right-[-80px] top-1/2 -translate-y-1/2 w-[820px] h-[820px] rounded-full border border-purple-100/30"></div>
           <div className="absolute right-[-30px] top-1/2 -translate-y-1/2 w-[660px] h-[660px] rounded-full border border-purple-100/20"></div>
         </div>
@@ -131,7 +131,7 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
