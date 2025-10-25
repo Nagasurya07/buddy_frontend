@@ -143,8 +143,8 @@ const UserProfile = () => {
             <div className="rounded-md bg-gray-50 p-3">
                 {/* Name, email and phone (with silver shade overlay) */}
                 <div className="relative rounded-md">
-                  {/* translucent silver shade behind this block only (reduced opacity) */}
-                  <span aria-hidden="true" className="absolute inset-0 rounded-md bg-gray-400/8 pointer-events-none" />
+                  {/* translucent silver shade behind this block only (silver tone) */}
+                  <span aria-hidden="true" className="absolute inset-0 rounded-md bg-slate-200/12 pointer-events-none" />
 
                   <div className="relative z-10">
                     <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{selectedUser?.name}</h1>
