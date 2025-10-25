@@ -18,7 +18,7 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
           {/* Avatar SVG */}
           <div className="relative">
             <div className="w-28 h-28 rounded-full bg-purple-100 ring-8 ring-purple-50 flex items-center justify-center">
-              <img src={ElementsSVG} alt="Profile avatar" className="w-22 h-22" />
+              <img src={ElementsSVG} alt="Profile avatar" className="w-14 h-20" />
             </div>
           </div>
           {/* subtle vertical separator to give a small separation feel */}
