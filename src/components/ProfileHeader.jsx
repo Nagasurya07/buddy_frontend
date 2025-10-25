@@ -97,6 +97,8 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
             </button>
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
           </div>
+          {/* subtle vertical separator to give a small separation feel */}
+          <div aria-hidden="true" className="w-px h-16 rounded bg-gradient-to-b from-transparent via-slate-300/30 to-transparent mx-2" />
 
           {/* Name, email and phone (shaded) */}
           <div className="rounded-md bg-gray-50 p-3">
