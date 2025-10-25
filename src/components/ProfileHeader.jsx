@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, Copy, Check } from 'lucide-react';
+import ElementsSVG from '../assets/elements.svg';
 
 const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
 
@@ -17,10 +18,7 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
           {/* Avatar SVG */}
           <div className="relative">
             <div className="w-28 h-28 rounded-full bg-purple-100 ring-8 ring-purple-50 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-purple-600">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+              <img src={ElementsSVG} alt="Profile avatar" className="w-24 h-24" />
             </div>
           </div>
           {/* subtle vertical separator to give a small separation feel */}
