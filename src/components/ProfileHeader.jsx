@@ -7,7 +7,7 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
   return (
     <>
       {/* Profile header: avatar + name + contact */}
-      <div className="relative overflow-hidden px-10 py-7 bg-gradient-to-r from-purple-50/70 to-white">
+      <div className="relative overflow-hidden px-10 py-8 bg-gradient-to-r from-purple-50 to-white">
         {/* decorative arcs on the right to match screenshot */}
         <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2">
           <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 w-[1280px] h-[1280px] rounded-full border border-purple-100/40"></div>
@@ -17,7 +17,7 @@ const ProfileHeader = ({ selectedUser, handleCopyEmail, copiedEmail }) => {
         <div className="relative flex items-center gap-6">
           {/* Avatar SVG */}
           <div className="relative">
-            <div className="w-28 h-28 rounded-full bg-purple-100 ring-8 ring-purple-50 flex items-center justify-center">
+            <div className="w-32 h-32 rounded-full bg-purple-100 ring-8 ring-purple-50 flex items-center justify-center">
               <img src={ElementsSVG} alt="Profile avatar" className="w-14 h-20" />
             </div>
           </div>

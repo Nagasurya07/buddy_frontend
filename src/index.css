@@ -10,6 +10,6 @@ body { @apply bg-gray-50; }
 @layer utilities {
 	/* Soft section/card shadow inspired by design */
 	.shadow-section-soft {
-		box-shadow: 0 8px 28px rgba(124, 58, 237, 0.12);
+		box-shadow: 0 8px 22px rgba(156, 152, 162, 0.12);
 	}
 }
