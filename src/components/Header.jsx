@@ -108,7 +108,13 @@ const Header = () => {
           </div>
 
           <Link to="/my-profile" className="p-2 bg-purple-100 rounded-full text-purple-600 hover:bg-purple-200 transition-colors" aria-label="My Profile">
-            <User size={30} />
+            {/* custom element SVG (uses currentColor for stroke/fill so it inherits text-purple-600) */}
+            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" className="block">
+              <path d="M4.3277 14.2316C2.91293 15.074 -0.796513 16.7941 1.46278 18.9466C2.56643 19.998 3.79561 20.75 5.34099 20.75H14.1593C15.7046 20.75 16.9338 19.998 18.0375 18.9466C20.2968 16.7941 16.5873 15.074 15.1725 14.2316C11.8549 12.2561 7.64531 12.2561 4.3277 14.2316Z"
+                fill="currentColor" fillOpacity="0.12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M14.2501 5.25C14.2501 7.73528 12.2354 9.75 9.75012 9.75C7.26484 9.75 5.25012 7.73528 5.25012 5.25C5.25012 2.76472 7.26484 0.75 9.75012 0.75C12.2354 0.75 14.2501 2.76472 14.2501 5.25Z"
+                stroke="currentColor" strokeWidth="1.5" />
+            </svg>
           </Link>
         </div>
       </div>
