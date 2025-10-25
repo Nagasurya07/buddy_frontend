@@ -33,6 +33,7 @@ const Users = () => {
             <span>Add user</span>
           </button>
         </div>
+     
 
         {/* Users table: rows mapped from users */}
         <div className="overflow-x-auto">
