@@ -1,4 +1,4 @@
-# Buddy — User Directory (Frontend)
+# Buddy — User Directory 
 
 [![Vite](https://img.shields.io/badge/Vite-5.x-brightgreen)](https://vitejs.dev/) [![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-teal)](https://tailwindcss.com/) [![License: Unspecified](https://img.shields.io/badge/license-Unspecified-lightgrey)](#)
 
